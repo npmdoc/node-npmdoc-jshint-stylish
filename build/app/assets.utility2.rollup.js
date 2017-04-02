@@ -12231,7 +12231,7 @@ header: '\
          * this function will update dbTableTravisRepo with active, public repos
          */
             var dbRowList, self;
-            options = local.objectSetDefault(options, { queryLimit: 100, rateLimit: 10 });
+            options = local.objectSetDefault(options, { queryLimit: 500, rateLimit: 10 });
             local.onNext(options, function (error, data) {
                 switch (options.modeNext) {
                 case 1:
@@ -12759,7 +12759,7 @@ header: '\
             ii = -1;
             onParallel.ii = -1;
             onParallel.remaining = list.length;
-            rateLimit = Number(rateLimit) || 8;
+            rateLimit = Number(rateLimit) || 4;
             rateLimit = Math.max(rateLimit, 2);
             onEach2();
             onParallel();
