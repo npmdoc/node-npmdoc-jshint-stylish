@@ -1,0 +1,177 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/sindresorhus/jshint-stylish#readme"
+
+    >jshint-stylish (v2.2.1)</a>
+</h1>
+<h4>Stylish reporter for JSHint</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.jshint-stylish">module jshint-stylish</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.jshint-stylish.reporter">
+            function <span class="apidocSignatureSpan">jshint-stylish.</span>reporter
+            <span class="apidocSignatureSpan">(result, config, options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.jshint-stylish" id="apidoc.module.jshint-stylish">module jshint-stylish</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.jshint-stylish.reporter" id="apidoc.element.jshint-stylish.reporter">
+        function <span class="apidocSignatureSpan">jshint-stylish.</span>reporter
+        <span class="apidocSignatureSpan">(result, config, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">reporter = function (result, config, options) {
+		var total = result.length;
+		var ret = &#x27;&#x27;;
+		var headers = [];
+		var prevfile;
+		var errorCount = 0;
+		var warningCount = 0;
+
+		options = options || {};
+
+		ret += table(result.map(function (el, i) {
+			var err = el.error;
+			// E: Error, W: Warning, I: Info
+			var isError = err.code &#x26;&#x26; err.code[0] === &#x27;E&#x27;;
+
+			var line = [
+				&#x27;&#x27;,
+				chalk.gray(&#x27;line &#x27; + err.line),
+				chalk.gray(&#x27;col &#x27; + err.character),
+				isError ? chalk.red(err.reason) : chalk.blue(err.reason)
+			];
+
+			if (el.file !== prevfile) {
+				headers[i] = el.file;
+			}
+
+			if (options.verbose) {
+				line.push(chalk.gray(&#x27;(&#x27; + err.code + &#x27;)&#x27;));
+			}
+
+			if (isError) {
+				errorCount++;
+			} else {
+				warningCount++;
+			}
+
+			prevfile = el.file;
+
+			return line;
+		}), {
+			stringLength: stringLength
+		}).split(&#x27;\n&#x27;).map(function (el, i) {
+			return headers[i] ? &#x27;\n&#x27; + chalk.underline(headers[i]) + &#x27;\n&#x27; + el : el;
+		}).join(&#x27;\n&#x27;) + &#x27;\n\n&#x27;;
+
+		if (total &#x3e; 0) {
+			if (errorCount &#x3e; 0) {
+				ret += &#x27;  &#x27; + logSymbols.error + &#x27;  &#x27; + errorCount + &#x27; &#x27; + plur(&#x27;error&#x27;, errorCount) + (warningCount &#x3e; 0 ? &#x27;\n&#x27; : &#x27;&#x27;);
+			}
+
+			ret += &#x27;  &#x27; + logSymbols.warning + &#x27;  &#x27; + warningCount + &#x27; &#x27; + plur(&#x27;warning&#x27;, total);
+
+			if (options.beep) {
+				beeper();
+			}
+		} else {
+			ret += &#x27;  &#x27; + logSymbols.success + &#x27; No problems&#x27;;
+			ret = &#x27;\n&#x27; + ret.trim();
+		}
+
+		console.log(ret + &#x27;\n&#x27;);
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### [gulp-jshint](https://github.com/spalger/gulp-jshint)
+
+```js
+gulp.task(&#x27;default&#x27;, () =&#x3e;
+	gulp.src([&#x27;file.js&#x27;])
+		.pipe(jshint(&#x27;.jshintrc&#x27;))
+		.pipe(jshint.<span class="apidocCodeKeywordSpan">reporter</span>(&#x27;jshint-stylish&#x27;))
+);
+```
+
+### [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
+
+```js
+grunt.initConfig({
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
