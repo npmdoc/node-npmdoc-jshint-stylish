@@ -3,9 +3,11 @@
 
 [![NPM](https://nodei.co/npm/jshint-stylish.png?downloads=true)](https://www.npmjs.com/package/jshint-stylish)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-jshint-stylish_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screenCapture.buildNpmdoc.browser.%2Fhome%2Ftravis%2Fbuild%2Fnpmdoc%2Fnode-npmdoc-jshint-stylish%2Ftmp%2Fbuild%2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
