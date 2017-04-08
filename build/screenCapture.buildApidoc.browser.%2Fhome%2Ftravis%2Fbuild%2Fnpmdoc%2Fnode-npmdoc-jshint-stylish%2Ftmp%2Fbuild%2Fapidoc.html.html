@@ -1,0 +1,171 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/sindresorhus/jshint-stylish#readme">jshint-stylish (v2.2.1)</a>
+</h1>
+<h4>Stylish reporter for JSHint</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.jshint-stylish">module jshint-stylish</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.jshint-stylish.reporter">
+            function <span class="apidocSignatureSpan">jshint-stylish.</span>reporter
+            <span class="apidocSignatureSpan">(result, config, options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.jshint-stylish" id="apidoc.module.jshint-stylish">module jshint-stylish</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.jshint-stylish.reporter" id="apidoc.element.jshint-stylish.reporter">
+        function <span class="apidocSignatureSpan">jshint-stylish.</span>reporter
+        <span class="apidocSignatureSpan">(result, config, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">reporter = function (result, config, options) {
+		var total = result.length;
+		var ret = '';
+		var headers = [];
+		var prevfile;
+		var errorCount = 0;
+		var warningCount = 0;
+
+		options = options || {};
+
+		ret += table(result.map(function (el, i) {
+			var err = el.error;
+			// E: Error, W: Warning, I: Info
+			var isError = err.code &amp;&amp; err.code[0] === 'E';
+
+			var line = [
+				'',
+				chalk.gray('line ' + err.line),
+				chalk.gray('col ' + err.character),
+				isError ? chalk.red(err.reason) : chalk.blue(err.reason)
+			];
+
+			if (el.file !== prevfile) {
+				headers[i] = el.file;
+			}
+
+			if (options.verbose) {
+				line.push(chalk.gray('(' + err.code + ')'));
+			}
+
+			if (isError) {
+				errorCount++;
+			} else {
+				warningCount++;
+			}
+
+			prevfile = el.file;
+
+			return line;
+		}), {
+			stringLength: stringLength
+		}).split('\n').map(function (el, i) {
+			return headers[i] ? '\n' + chalk.underline(headers[i]) + '\n' + el : el;
+		}).join('\n') + '\n\n';
+
+		if (total &gt; 0) {
+			if (errorCount &gt; 0) {
+				ret += '  ' + logSymbols.error + '  ' + errorCount + ' ' + plur('error', errorCount) + (warningCount &gt; 0 ? '\n' : '');
+			}
+
+			ret += '  ' + logSymbols.warning + '  ' + warningCount + ' ' + plur('warning', total);
+
+			if (options.beep) {
+				beeper();
+			}
+		} else {
+			ret += '  ' + logSymbols.success + ' No problems';
+			ret = '\n' + ret.trim();
+		}
+
+		console.log(ret + '\n');
+	}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+### [gulp-jshint](https://github.com/spalger/gulp-jshint)
+
+```js
+gulp.task('default', () =&gt;
+	gulp.src(['file.js'])
+		.pipe(jshint('.jshintrc'))
+		.pipe(jshint.<span class="apidocCodeKeywordSpan">reporter</span>('jshint-stylish'))
+);
+```
+
+### [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
+
+```js
+grunt.initConfig({
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
