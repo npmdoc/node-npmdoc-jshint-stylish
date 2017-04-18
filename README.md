@@ -1,9 +1,14 @@
-# api documentation for  [jshint-stylish (v2.2.1)](https://github.com/sindresorhus/jshint-stylish#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-jshint-stylish.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-jshint-stylish) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-jshint-stylish.svg)](https://travis-ci.org/npmdoc/node-npmdoc-jshint-stylish)
+# npmdoc-jshint-stylish
+
+#### api documentation for  [jshint-stylish (v2.2.1)](https://github.com/sindresorhus/jshint-stylish#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-jshint-stylish.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-jshint-stylish) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-jshint-stylish.svg)](https://travis-ci.org/npmdoc/node-npmdoc-jshint-stylish)
+
 #### Stylish reporter for JSHint
 
-[![NPM](https://nodei.co/npm/jshint-stylish.png?downloads=true)](https://www.npmjs.com/package/jshint-stylish)
+[![NPM](https://nodei.co/npm/jshint-stylish.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/jshint-stylish)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screenCapture.buildNpmdoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-jshint-stylish%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-jshint-stylish/build/screenCapture.npmPackageListing.svg)
 
@@ -18,7 +23,6 @@
 {
     "author": {
         "name": "Sindre Sorhus",
-        "email": "sindresorhus@gmail.com",
         "url": "sindresorhus.com"
     },
     "bugs": {
@@ -65,13 +69,11 @@
     "license": "MIT",
     "maintainers": [
         {
-            "name": "sindresorhus",
-            "email": "sindresorhus@gmail.com"
+            "name": "sindresorhus"
         }
     ],
     "name": "jshint-stylish",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/sindresorhus/jshint-stylish.git"
@@ -81,104 +83,6 @@
     },
     "version": "2.2.1"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module jshint-stylish](#apidoc.module.jshint-stylish)
-1.  [function <span class="apidocSignatureSpan">jshint-stylish.</span>reporter (result, config, options)](#apidoc.element.jshint-stylish.reporter)
-
-
-
-# <a name="apidoc.module.jshint-stylish"></a>[module jshint-stylish](#apidoc.module.jshint-stylish)
-
-#### <a name="apidoc.element.jshint-stylish.reporter"></a>[function <span class="apidocSignatureSpan">jshint-stylish.</span>reporter (result, config, options)](#apidoc.element.jshint-stylish.reporter)
-- description and source-code
-```javascript
-reporter = function (result, config, options) {
-		var total = result.length;
-		var ret = '';
-		var headers = [];
-		var prevfile;
-		var errorCount = 0;
-		var warningCount = 0;
-
-		options = options || {};
-
-		ret += table(result.map(function (el, i) {
-			var err = el.error;
-			// E: Error, W: Warning, I: Info
-			var isError = err.code && err.code[0] === 'E';
-
-			var line = [
-				'',
-				chalk.gray('line ' + err.line),
-				chalk.gray('col ' + err.character),
-				isError ? chalk.red(err.reason) : chalk.blue(err.reason)
-			];
-
-			if (el.file !== prevfile) {
-				headers[i] = el.file;
-			}
-
-			if (options.verbose) {
-				line.push(chalk.gray('(' + err.code + ')'));
-			}
-
-			if (isError) {
-				errorCount++;
-			} else {
-				warningCount++;
-			}
-
-			prevfile = el.file;
-
-			return line;
-		}), {
-			stringLength: stringLength
-		}).split('\n').map(function (el, i) {
-			return headers[i] ? '\n' + chalk.underline(headers[i]) + '\n' + el : el;
-		}).join('\n') + '\n\n';
-
-		if (total > 0) {
-			if (errorCount > 0) {
-				ret += '  ' + logSymbols.error + '  ' + errorCount + ' ' + plur('error', errorCount) + (warningCount > 0 ? '\n' : '');
-			}
-
-			ret += '  ' + logSymbols.warning + '  ' + warningCount + ' ' + plur('warning', total);
-
-			if (options.beep) {
-				beeper();
-			}
-		} else {
-			ret += '  ' + logSymbols.success + ' No problems';
-			ret = '\n' + ret.trim();
-		}
-
-		console.log(ret + '\n');
-	}
-```
-- example usage
-```shell
-...
-
-### [gulp-jshint](https://github.com/spalger/gulp-jshint)
-
-'''js
-gulp.task('default', () =>
-	gulp.src(['file.js'])
-		.pipe(jshint('.jshintrc'))
-		.pipe(jshint.reporter('jshint-stylish'))
-);
-'''
-
-### [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
-
-'''js
-grunt.initConfig({
-...
 ```
 
 
