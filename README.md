@@ -1,6 +1,6 @@
 # npmdoc-jshint-stylish
 
-#### api documentation for  [jshint-stylish (v2.2.1)](https://github.com/sindresorhus/jshint-stylish#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-jshint-stylish.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-jshint-stylish) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-jshint-stylish.svg)](https://travis-ci.org/npmdoc/node-npmdoc-jshint-stylish)
+#### basic api documentation for  [jshint-stylish (v2.2.1)](https://github.com/sindresorhus/jshint-stylish#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-jshint-stylish.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-jshint-stylish) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-jshint-stylish.svg)](https://travis-ci.org/npmdoc/node-npmdoc-jshint-stylish)
 
 #### Stylish reporter for JSHint
 
@@ -81,7 +81,8 @@
     "scripts": {
         "test": "xo && mocha"
     },
-    "version": "2.2.1"
+    "version": "2.2.1",
+    "bin": {}
 }
 ```
 
